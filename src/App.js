@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react';
 function App() {
   const [templates, setTemplates] = useState([]);
   const [dropdown, setDropdown] = useState('');
-  const [toptext, setToptext] = useState('');
-  const [bottomtext, setBottomtext] = useState('');
+  const [toptext, setToptext] = useState('_');
+  const [bottomtext, setBottomtext] = useState('_');
   const [typein, setTypein] = useState('');
-
   const [image, setImage] = useState(
     'https://api.memegen.link/images/aag/_/_.png',
   );
@@ -43,6 +42,14 @@ function App() {
         <label>
           Meme template <br />
           <select
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                setImage(
+                  `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
+                );
+              }
+            }}
             onChange={(event) => {
               setDropdown(event.currentTarget.value);
             }}
@@ -55,28 +62,30 @@ function App() {
             ))}
           </select>
         </label>
-
         <br />
         <br />
-
         {/* input typein */}
-
         <label>
           Option to type name of image:
           <br />
           <input
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                setImage(
+                  `https://api.memegen.link/images/${typein}/${toptext}/${bottomtext}.png`,
+                );
+              }
+            }}
             value={typein}
             onChange={(event) => {
               setTypein(event.currentTarget.value);
             }}
           />
         </label>
-
         <br />
         <br />
-
         {/* input top text */}
-
         <label>
           Enter top text here:
           <br />
@@ -87,12 +96,9 @@ function App() {
             }}
           />
         </label>
-
         <br />
         <br />
-
         {/* input bottom text */}
-
         <label>
           Enter bottom text here:
           <br />
@@ -103,15 +109,12 @@ function App() {
             }}
           />
         </label>
-
         <br />
         <br />
-
         {/* clear button */}
-
         <button className="button" onClick="resetForm()">
           Reset
-        </button>
+        </button>{' '}
       </form>
 
       {/* button generates meme onclick
