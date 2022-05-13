@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 function App() {
   const [templates, setTemplates] = useState([]);
   const [dropdown, setDropdown] = useState('');
-  const [toptext, setToptext] = useState('top text');
-  const [bottomtext, setBottomtext] = useState('bottom text');
+  const [toptext, setToptext] = useState('');
+  const [bottomtext, setBottomtext] = useState('');
+  const [typein, setTypein] = useState('');
+
   const [image, setImage] = useState(
     'https://api.memegen.link/images/aag/hello/you.png',
   );
@@ -53,10 +55,22 @@ function App() {
             ))}
           </select>
         </label>
-
         <br />
         <br />
-
+        {/* input typein */}
+        <label>
+          Option to type name of image:
+          <br />
+          <input
+            value={typein}
+            onChange={(event) => {
+              setTypein(event.currentTarget.value);
+            }}
+          />
+        </label>
+        <br />
+        <br />
+        {/* input top text */}
         <label>
           Enter top text here:
           <br />
@@ -67,12 +81,11 @@ function App() {
             }}
           />
         </label>
-
         <br />
         <br />
-
+        {/* input bottom text */}
         <label>
-          Enter top text here:
+          Enter bottom text here:
           <br />
           <input
             value={bottomtext}
@@ -81,38 +94,57 @@ function App() {
             }}
           />
         </label>
-
         <br />
         <br />
+        <br />
+        {/* button generates meme onclick
+      either with a typed in imagename if there is one
+      or with a dropbdown imagename */}
+        <button
+          className="button"
+          onClick={() => {
+            if (typein) {
+              setImage(
+                `https://api.memegen.link/images/${typein}/${toptext}/${bottomtext}.png`,
+              );
+            } else {
+              setImage(
+                `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
+              );
+            }
+          }}
+        >
+          Generate Meme
+        </button>
+        {/* clear button */}
+        <button
+          className="button"
+          onClick={() => {
+            setToptext('')(setBottomtext(''));
+          }}
+        >
+          Clear text
+        </button>
+        {/* download button */}
+        <button
+          className="button"
+          onClick={() => {
+            console.log(image);
+            setImage(image);
+            saveFile();
+          }}
+        >
+          {' '}
+          Download
+        </button>{' '}
       </form>
+
       <br />
-      {/* button generates al the set infos into the link to set image */}
-      <button
-        className="button"
-        onClick={() => {
-          setImage(
-            `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
-          );
-        }}
-      >
-        Generate
-      </button>
-      <br /> <br />
+      <br />
+
+      {/* image preview */}
+
       <img data-test-id="meme-image" src={image} alt="" />
-      <br />
-      <br />
-      <button
-        className="button"
-        onClick={() => {
-          console.log(image);
-          setImage(image);
-          saveFile();
-        }}
-      >
-        {' '}
-        Download
-      </button>
-      <br />
     </div>
   );
 }
