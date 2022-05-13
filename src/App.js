@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 function App() {
   const [templates, setTemplates] = useState([]);
   const [dropdown, setDropdown] = useState('');
-  const [toptext, setToptext] = useState('_');
-  const [bottomtext, setBottomtext] = useState('_');
+  const [toptext, setToptext] = useState('');
+  const [bottomtext, setBottomtext] = useState('');
   const [typein, setTypein] = useState('');
   const [image, setImage] = useState(
     'https://api.memegen.link/images/aag/_/_.png',
@@ -66,9 +66,10 @@ function App() {
         <br />
         {/* input typein */}
         <label>
-          Optional Meme name
+          Optional
           <br />
           <input
+            placeholder="type in meme name"
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 event.preventDefault();
@@ -90,7 +91,16 @@ function App() {
           Top text
           <br />
           <input
+            placeholder="type in top text"
             value={toptext}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                setImage(
+                  `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
+                );
+              }
+            }}
             onChange={(event) => {
               setToptext(event.currentTarget.value);
             }}
@@ -103,6 +113,7 @@ function App() {
           Bottom text
           <br />
           <input
+            placeholder="type in bottom text"
             value={bottomtext}
             onChange={(event) => {
               setBottomtext(event.currentTarget.value);
