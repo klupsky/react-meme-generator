@@ -66,7 +66,7 @@ function App() {
         <br />
         {/* input typein */}
         <label>
-          Top text
+          Optional Meme name
           <br />
           <input
             onKeyDown={(event) => {
@@ -87,7 +87,7 @@ function App() {
         <br />
         {/* input top text */}
         <label>
-          Bottom text
+          Top text
           <br />
           <input
             value={toptext}
@@ -100,7 +100,7 @@ function App() {
         <br />
         {/* input bottom text */}
         <label>
-          Enter bottom text here:
+          Bottom text
           <br />
           <input
             value={bottomtext}
