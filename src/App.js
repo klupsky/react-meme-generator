@@ -66,7 +66,7 @@ function App() {
         <br />
         {/* input typein */}
         <label>
-          Option to type name of image:
+          Top text
           <br />
           <input
             onKeyDown={(event) => {
@@ -87,7 +87,7 @@ function App() {
         <br />
         {/* input top text */}
         <label>
-          Enter top text here:
+          Bottom text
           <br />
           <input
             value={toptext}
