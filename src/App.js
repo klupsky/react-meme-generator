@@ -65,28 +65,6 @@ function App() {
         </label>
         <br />
         <br />
-        {/* input typein
-        <label>
-          Optional
-          <br />
-          <input
-            placeholder="type in meme name"
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                event.preventDefault();
-                setImage(
-                  `https://api.memegen.link/images/${typein}/${toptext}/${bottomtext}.png`,
-                );
-              }
-            }}
-            value={typein}
-            onChange={(event) => {
-              setTypein(event.currentTarget.value);
-            }}
-          />
-        </label>
-        <br />
-        <br />*/}
         {/* input top text */}
         <label>
           Top text
