@@ -4,7 +4,8 @@
 
 body {
   text-align: center;
-  background-color: grey;
+  background-color: #f6f5f1;
+  margin: 20px;
 }
 .button {
   background-color: #ffffff;

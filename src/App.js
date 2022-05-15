@@ -8,9 +8,9 @@ function App() {
   const [dropdown, setDropdown] = useState('');
   const [toptext, setToptext] = useState('');
   const [bottomtext, setBottomtext] = useState('');
-  const [typein, setTypein] = useState('');
+  // const [typein, setTypein] = useState('');
   const [image, setImage] = useState(
-    'https://api.memegen.link/images/aag/_/_.png',
+    `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
   );
 
   // from filesaver package
@@ -39,6 +39,7 @@ function App() {
   return (
     <div>
       <form name="meme">
+        <h1>Make your meme!</h1>
         <label>
           Meme template <br />
           <select
@@ -64,7 +65,7 @@ function App() {
         </label>
         <br />
         <br />
-        {/* input typein */}
+        {/* input typein
         <label>
           Optional
           <br />
@@ -85,7 +86,7 @@ function App() {
           />
         </label>
         <br />
-        <br />
+        <br />*/}
         {/* input top text */}
         <label>
           Top text
@@ -93,14 +94,6 @@ function App() {
           <input
             placeholder="type in top text"
             value={toptext}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                event.preventDefault();
-                setImage(
-                  `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
-                );
-              }
-            }}
             onChange={(event) => {
               setToptext(event.currentTarget.value);
             }}
@@ -135,15 +128,9 @@ function App() {
       <button
         className="button"
         onClick={() => {
-          if (typein) {
-            setImage(
-              `https://api.memegen.link/images/${typein}/${toptext}/${bottomtext}.png`,
-            );
-          } else {
-            setImage(
-              `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
-            );
-          }
+          setImage(
+            `https://api.memegen.link/images/${dropdown}/${toptext}/${bottomtext}.png`,
+          );
         }}
       >
         Generate Meme
@@ -168,7 +155,13 @@ function App() {
 
       {/* image preview */}
 
-      <img data-test-id="meme-image" src={image} alt="" />
+      <img
+        data-test-id="meme-image"
+        src={`https://api.memegen.link/images/${dropdown ? dropdown : 'aag'}/${
+          toptext ? toptext : '_'
+        }/${bottomtext ? bottomtext : '_'}.png`}
+        alt="memeimage"
+      />
     </div>
   );
 }
