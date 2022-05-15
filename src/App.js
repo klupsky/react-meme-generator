@@ -159,7 +159,7 @@ function App() {
         data-test-id="meme-image"
         src={`https://api.memegen.link/images/${dropdown ? dropdown : 'aag'}/${
           toptext ? toptext : '_'
-        }/${bottomtext ? bottomtext : '_'}.png`}
+        }/${bottomtext ? bottomtext : ''}.png`}
         alt="memeimage"
       />
     </div>
